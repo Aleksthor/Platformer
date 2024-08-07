@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class JumpThrough : MonoBehaviour
+namespace Game.Main
 {
-    public BoxCollider2D boxCollider;
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class JumpThrough : MonoBehaviour
     {
-        if (collision.CompareTag("Player"))
+        public BoxCollider2D boxCollider;
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            boxCollider.enabled = true;
+            if (collision.CompareTag("Player"))
+            {
+                boxCollider.enabled = true;
+            }
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            boxCollider.enabled = false;
+            if (collision.CompareTag("Player"))
+            {
+                boxCollider.enabled = false;
+            }
         }
     }
 }

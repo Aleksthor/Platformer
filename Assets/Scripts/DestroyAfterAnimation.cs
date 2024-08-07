@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DestroyAfterAnimation : StateMachineBehaviour
+namespace Game.Main
 {
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public class DestroyAfterAnimation : StateMachineBehaviour
     {
-        Destroy(animator.gameObject, stateInfo.length);
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            Destroy(animator.gameObject, stateInfo.length);
+        }
     }
 }

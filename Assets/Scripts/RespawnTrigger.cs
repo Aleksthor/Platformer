@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RespawnTrigger : MonoBehaviour
+namespace Game.Main
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    public class RespawnTrigger : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            other.GetComponent<Movement>().Respawn();
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<Movement>().Respawn();
+            }
         }
     }
 }

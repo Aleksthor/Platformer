@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Grass : MonoBehaviour
+namespace Game.Main
 {
-    Animator animator;
-    private void Awake()
+    public class Grass : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        Animator animator;
+        private void Awake()
         {
-            Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
-            animator.SetTrigger(rb.velocity.x > 0f ? "Right" : "Left");
+            animator = GetComponent<Animator>();
+        }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
+                animator.SetTrigger(rb.velocity.x > 0f ? "Right" : "Left");
+            }
         }
     }
 }

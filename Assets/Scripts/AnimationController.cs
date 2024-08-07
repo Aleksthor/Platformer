@@ -2,45 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationController : MonoBehaviour
+
+namespace Game.Main
 {
-    Animator animator;
-    Movement movement;
-    Player player;
-    public float groundedBuffer = 0.1f;
-    private float groundTimer = 0f;
-
-    private void Start()
+    public class AnimationController : MonoBehaviour
     {
-        player = GetComponent<Player>();
-        movement = GetComponent<Movement>();    
-        animator = GetComponent<Animator>();
-    }
+        Animator animator;
+        Movement movement;
+        Player player;
+        public float groundedBuffer = 0.1f;
+        private float groundTimer = 0f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        animator.SetBool("Walking", movement.IsWalking());
-        animator.SetBool("Right", movement.Flip());
-        if (!movement.IsGrounded())
+        private void Start()
         {
-            groundTimer += Time.deltaTime;
-            if (groundTimer > groundedBuffer)
+            player = GetComponent<Player>();
+            movement = GetComponent<Movement>();
+            animator = GetComponent<Animator>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            animator.SetBool("Walking", movement.IsWalking());
+            animator.SetBool("Right", movement.Flip());
+            if (!movement.IsGrounded())
+            {
+                groundTimer += Time.deltaTime;
+                if (groundTimer > groundedBuffer)
+                {
+                    animator.SetBool("Grounded", movement.IsGrounded());
+                }
+            }
+            else
             {
                 animator.SetBool("Grounded", movement.IsGrounded());
+                groundTimer = 0f;
             }
+            animator.SetBool("Staff", player.HasStaff());
+
         }
-        else
+
+        public void TriggerDoubleJump()
         {
-            animator.SetBool("Grounded", movement.IsGrounded());
-            groundTimer = 0f;
+            animator.SetTrigger("DoubleJump");
         }
-        animator.SetBool("Staff", player.HasStaff());
-
-    }
-
-    public void TriggerDoubleJump()
-    {
-        animator.SetTrigger("DoubleJump");
     }
 }
